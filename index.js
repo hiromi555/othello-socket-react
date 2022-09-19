@@ -11,11 +11,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 //ioインスタンス作成（サーバーを渡す)
 import { Server } from 'socket.io'
-const io = new Server(server, {
-//    cors: {
-//     origin: "http://localhost:3000"
-//   }
-});
+const io = new Server(server);
 //静的ファイル
 app.use(express.static(path.join(__dirname, './frontend/build')));
 // ホーム（/）にアクセス時に返却するHTMLファイル
