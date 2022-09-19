@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { board, countStone, okList, serchOkCells, getStoneListAndOkList } from './othello/model.js'
 import io from "socket.io-client";
 const socket = io();
+socket.emit('message', '接続しました')
 
 const handlePass = (turn) => {
  socket.emit('clickPass', turn)
@@ -17,21 +18,6 @@ function App() {
     const [count, setCount] = useState({ black: 2, white: 2 });
     const [pass, setPass] = useState(false);
     const [okCells, setOkCells] = useState(okList);
-    const [isConnected, setIsConnected] = useState(socket.connected);
-
-//接続確認
-useEffect(() => {
-    socket.on('connect', () => {
-      setIsConnected(true);
-    });
-    socket.on('disconnect', () => {
-      setIsConnected(false);
-    });
-    return () => {
-      socket.off('connect');
-      socket.off('disconnect');
-  };
-}, []);
 
 //サーバーから届いた座標で石を置く
 useEffect(() => {
@@ -99,7 +85,7 @@ useEffect(() => {
     return (
     <div>
     <div className="App">
-        {isConnected ? <p>接続中</p> : <p>切断されました！</p>}
+        {/* {isConnected ? <p>接続中</p> : <p>切断されました！</p>} */}
         {finish && <div className="finish">
          ゲーム終了!! <span> 黒{count.black}個 </span>
                <span> 白{count.white}個 </span>

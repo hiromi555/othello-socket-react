@@ -25,7 +25,9 @@ app.get('*', (req, res) => {
 
 //本番　オセロ
 io.on('connection', (socket) => {
-    socket.broadcast.emit('message', '接続されました')
+    socket.on('message', (message) => {
+       socket.broadcast.emit('message', message)
+    })
     //クライアントから座標が届く
     socket.on('clickCell', (payload) => {
     //届いた座標を全クライアントに送信
@@ -40,9 +42,9 @@ io.on('connection', (socket) => {
     socket.on('sendMessage', (message) => {
         io.emit('message', message)
     })
-    socket.on('disconnect', () => {
-      io.emit('message', '切断されました！')
-    })
+    socket.on("disconnect", () => {
+        io.emit('message', '相手はオフラインです')
+    });
 });
 
 //server.listen　：app.listenでないことに注意
