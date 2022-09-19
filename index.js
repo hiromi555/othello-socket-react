@@ -16,9 +16,8 @@ const io = new Server(server, {
 //     origin: "http://localhost:3000"
 //   }
 });
-
+//静的ファイル
 app.use(express.static(path.join(__dirname, './frontend/build')));
-
 // ホーム（/）にアクセス時に返却するHTMLファイル
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname,'./frontend/index.html'));
