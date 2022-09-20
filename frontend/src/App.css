@@ -118,13 +118,13 @@ font-size:1.25em;
 }
 .mess-wrap{
    margin: 1rem 0;
-   text-align:left;
 }
 .center{
   text-align:center;
   font-size: 1.1rem;
  }
 .small{
+ text-align:left;
  padding: 0 0.5rem;
  font-size: 0.85rem;
 }
