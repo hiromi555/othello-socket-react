@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import io  from "socket.io-client";
 const socket = io();
 
-export const Message = () => {
+export const Message = ({size}) => {
     const [message, setText] = useState('');
     const [messageList, setMessageList] = useState([]);
     //メッセージを送る
@@ -27,7 +27,7 @@ export const Message = () => {
     },[message])
 
     return (
-        <div className='mess-wrap'>
+        <div className='mess-wrap' style={{ width: size*8}}>
            <ul className='message'>
              {messageList.map((message, index) =>
              <li key={`m-${index}`}>{message}</li>
@@ -35,11 +35,12 @@ export const Message = () => {
             </ul>
             <form onSubmit={addMessage} className="fixed">
             <input
-                placeholder="メッセージ"
+                style={{ width: size*6.5}}
+                placeholder=" メッセージ"
                 type="text"
                 value={message}
                 onChange={(e) => setText( e.target.value )}/>
-                <button className="button">送信</button>
+                <button className="button" style={{ width: size*1.5}}>送信</button>
             </form>
         </div>
     )

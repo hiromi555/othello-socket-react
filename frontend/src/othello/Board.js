@@ -1,20 +1,12 @@
 import { Cell } from './Cell'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-export const Board = ({othello, okCells, myTurn}) => {
-const [size, setSize] = useState(64);
+export const Board = ({othello, okCells, myTurn, size}) => {
 const [active, setActive] = useState(false);
-
-//Cellのサイズ
-useEffect(() => {
-     window.innerWidth <= window.innerHeight ? setSize( window.innerWidth*0.09):setSize( window.innerHeight*0.09)
-}, []);
-
 //クリックできるマスの表示非表示
 const classToggle = () => {
     setActive(pre=>!pre)
 }
-
 return (
    <>
     <div className='outline'>

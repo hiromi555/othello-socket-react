@@ -1,5 +1,6 @@
 import './App.css';
 import { Board } from './othello/Board'
+import {Info} from './othello/Info'
 import { Reload } from './Reload'
 import { Message } from './Message';
 import { useState, useEffect } from 'react';
@@ -8,10 +9,8 @@ import io from "socket.io-client";
 const socket = io();
 socket.emit('message', '接続しました')
 
-const handlePass = (turn) => {
- socket.emit('clickPass', turn)
-}
 function App() {
+    const [size, setSize] = useState(64);
     const [othello, setBoard] =useState(board)
     const [myTurn, setMyTurn] = useState(true);
     const [finish, setFinish] = useState(false);
@@ -50,20 +49,20 @@ useEffect(() => {
 
 //パスした場合
 useEffect(() => {
- socket.on('putPass', (turn) => {
-  //手番の切り替え
-  setMyTurn(!turn.turn)
- let okList = serchOkCells(othello, !turn.turn)
-     setOkCells(() => okList)
-     setPass(() => {
-        if (okList.length === 0) {
-            setFinish(true)
-        }else return false
+    socket.on('putPass', (turn) => {
+    //手番の切り替え
+    setMyTurn(!turn.turn)
+    let okList = serchOkCells(othello, !turn.turn)
+        setOkCells(() => okList)
+        setPass(() => {
+            if (okList.length === 0) {
+                setFinish(true)
+            }else return false
+        })
     })
- })
-  return () => {
-    socket.off('putPass');
-  };
+    return () => {
+        socket.off('putPass');
+    };
 }, [othello]);
 
 //石の数.手番
@@ -82,30 +81,34 @@ useEffect(() => {
         setFinish(true)
     }
 }, [count])
+//Cellのサイズ
+useEffect(() => {
+     window.innerWidth <= window.innerHeight ? setSize( window.innerWidth*0.09):setSize( window.innerHeight*0.09)
+}, []);
+
     return (
-    <div>
-    <div className="App">
-        {/* {isConnected ? <p>接続中</p> : <p>切断されました！</p>} */}
-        {finish && <div className="finish">
-         ゲーム終了!! <span> 黒{count.black}個 </span>
-               <span> 白{count.white}個 </span>
-        </div>}
-        <div className='info'>
-        {!finish && <div className={myTurn ? 'turn myTurn' : 'turn'}>黒（{count.black }）</div>}
-        {(pass && !finish) && <button className="button -sm" onClick={() => handlePass({ turn: myTurn })}>クリック（パスです！！）</button>}
-        {!finish && <div className={!myTurn ? 'turn myTurn' : 'turn'}>白（{count.white }）</div>}
-        </div>
-            <Board
-                othello={othello}
-                okCells={okCells}
-                myTurn ={myTurn}
-                />
-            <Reload />
-            </div>
-    <div className="App Mess">
-         <Message />
+    <>
+      <div className="App">
+        <Info
+            finish={finish}
+            myTurn={myTurn}
+            count={count}
+            pass={pass}
+         />
+        <Board
+          size={size}
+          othello={othello}
+          okCells={okCells}
+          myTurn ={myTurn}
+         />
+        <Reload />
+     </div>
+     <div className="App Mess">
+        <Message
+          size={size}
+        />
       </div>
-    </div>
+    </>
   );
 }
 
