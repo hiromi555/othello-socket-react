@@ -38,8 +38,8 @@ io.on('connection', (socket) => {
     socket.on('sendMessage', (message) => {
         io.emit('message', message)
     })
-    socket.on("disconnect", () => {
-        io.emit('message', "他の人が切断しました")
+    socket.on("disconnect", (reason) => {
+        io.emit('message', `他の人の切断状況：${reason}`)
     });
 });
 
