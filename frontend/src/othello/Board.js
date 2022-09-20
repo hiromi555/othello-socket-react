@@ -1,12 +1,12 @@
 import { Cell } from './Cell'
 import { useState } from 'react';
 
-export const Board = ({othello, okCells, myTurn, size}) => {
-const [active, setActive] = useState(false);
-//クリックできるマスの表示非表示
-const classToggle = () => {
-    setActive(pre=>!pre)
-}
+export const Board = ({othello, okCells, myTurn, size, active}) => {
+// const [active, setActive] = useState(false);
+// //クリックできるマスの表示非表示
+// const classToggle = () => {
+//     setActive(pre=>!pre)
+// }
 return (
    <>
     <div className='outline'>
@@ -26,9 +26,7 @@ return (
             </div>
           )}
         </div>
-         <div className="button-wrap -show">
-            クリックできるマス<button className="button" onClick={classToggle}>{active ? <span>表示</span> : <span>非表示</span>}</button>
-         </div>
+
     </>
   );
 }

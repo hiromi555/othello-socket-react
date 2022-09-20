@@ -17,6 +17,11 @@ function App() {
     const [count, setCount] = useState({ black: 2, white: 2 });
     const [pass, setPass] = useState(false);
     const [okCells, setOkCells] = useState(okList);
+    const [active, setActive] = useState(false);
+    //クリックできるマスの表示非表示
+    const ShowCells = () => {
+        setActive(true)
+    }
 
 //サーバーから届いた座標で石を置く
 useEffect(() => {
@@ -39,7 +44,8 @@ useEffect(() => {
         }else return false
     })
     //手番の切り替え
-    setMyTurn(!payload.turn)
+        setMyTurn(!payload.turn)
+        setActive(false)
      }
     )
     return () => {
@@ -99,8 +105,12 @@ useEffect(() => {
           size={size}
           othello={othello}
           okCells={okCells}
-          myTurn ={myTurn}
-         />
+          myTurn={myTurn}
+          active={active}
+          />
+         <div className="button-wrap -show">
+            <button className="button" onClick={ShowCells}>クリックできるマスを見る</button>
+         </div>
         <Reload />
      </div>
      <div className="App Mess">
