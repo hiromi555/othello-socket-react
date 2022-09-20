@@ -22,6 +22,16 @@ function App() {
 const ShowCells = () => {
     setActive(true)
 }
+//接続数
+useEffect(() => {
+  socket.on('client-count', (clientCunt) => {
+     setConnectionsNum(clientCunt/4)
+  })
+   return () => {
+      socket.off('client-count');
+  };
+}, [connectionsNum]);
+
 //サーバーから届いた座標で石を置く
 useEffect(() => {
     socket.on('putStone', (payload) => {
@@ -51,12 +61,6 @@ useEffect(() => {
       socket.off('putStone');
   };
 }, [othello]);
-//接続数
-useEffect(() => {
-  socket.on('client-count', (clientCunt) => {
-     setConnectionsNum(clientCunt/4)
-  })
-}, [connectionsNum]);
 
 //パスした場合
 useEffect(() => {
