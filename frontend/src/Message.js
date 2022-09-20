@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import io  from "socket.io-client";
+import io from "socket.io-client";
+import xssFilters from 'xss-filters'
+
 const socket = io();
 
 export const Message = ({size}) => {
@@ -9,7 +11,7 @@ export const Message = ({size}) => {
     const addMessage = (e) => {
         e.preventDefault()
         if(message !==''){
-         socket.emit('sendMessage', message)
+         socket.emit('sendMessage', xssFilters.inHTMLData(message))
         }
         setText('')
     }
