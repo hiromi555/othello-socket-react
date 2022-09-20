@@ -30,7 +30,7 @@ export const Message = ({size, connectionsNum}) => {
     return (
         <div className='mess-wrap' style={{ width: size * 9 }}>
             <p className='center'>接続数：{ connectionsNum }</p>
-            <p className='small'>＊諸事情により15分間隔ロボットが自動アクセスしています</p>
+            <p className='small'>＊諸事情により15分間隔でロボットが自動アクセスしています</p>
            <ul className='message'>
              {messageList.map((message, index) =>
              <li key={`m-${index}`}>{message}</li>
@@ -43,7 +43,7 @@ export const Message = ({size, connectionsNum}) => {
                 type="text"
                 value={message}
                 onChange={(e) => setText( e.target.value )}/>
-                <button className="button" style={{ width: size*2}}>送信</button>
+                <button className="button" style={{ width: size * 2}}>送信</button>
             </form>
         </div>
     )

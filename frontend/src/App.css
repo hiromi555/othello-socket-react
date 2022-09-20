@@ -117,6 +117,7 @@ font-size:1.25em;
     font-size: 1.1rem;
 }
 .mess-wrap{
+   padding: 0 0.5rem;
    margin: 1rem 0;
    text-align:left;
 }
