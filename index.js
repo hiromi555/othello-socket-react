@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
         io.emit('message', message)
     })
     socket.on("disconnect", (reason) => {
-        io.emit('message', `他の人の切断状況：${reason}`)
+        io.emit('message', `（サーバー情報）切断：${reason}`)
     });
 });
 

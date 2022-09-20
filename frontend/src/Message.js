@@ -6,7 +6,7 @@ const socket = io();
 
 export const Message = ({size}) => {
     const [message, setText] = useState('');
-    const [messageList, setMessageList] = useState([]);
+    const [messageList, setMessageList] = useState(['オセロゲームへようこそ!!']);
     //メッセージを送る
     const addMessage = (e) => {
         e.preventDefault()
@@ -29,12 +29,13 @@ export const Message = ({size}) => {
     },[message])
 
     return (
-        <div className='mess-wrap' style={{ width: size*9}}>
+        <div className='mess-wrap' style={{ width: size * 9 }}>
            <ul className='message'>
              {messageList.map((message, index) =>
              <li key={`m-${index}`}>{message}</li>
              )}
             </ul>
+             <p>＊（サーバー情報）諸事情により15分間隔で自動アクセスしています</p>
             <form onSubmit={addMessage} className="fixed">
             <input
                 style={{ width: size*7}}

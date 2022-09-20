@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import { board, countStone, okList, serchOkCells, getStoneListAndOkList } from './othello/model.js'
 import io from "socket.io-client";
 const socket = io();
-socket.emit('message', '接続しました')
+socket.emit('message', '（サーバー情報）接続されました')
 
 function App() {
     const [size, setSize] = useState(64);

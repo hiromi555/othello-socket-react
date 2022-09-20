@@ -114,11 +114,11 @@ font-size:1.25em;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 0px 0px;
 }
 .message > li{
-    text-align: left;
     font-size: 1.1rem;
 }
 .mess-wrap{
    margin: 3rem 0;
+   text-align:left;
 }
 input{
     width: 270px;
