@@ -7,7 +7,6 @@ import { useState, useEffect } from 'react';
 import { board, countStone, okList, serchOkCells, getStoneListAndOkList } from './othello/model.js'
 import io from "socket.io-client";
 const socket = io();
-socket.emit('message', '（サーバー情報）接続されました')
 
 function App() {
     const [size, setSize] = useState(64);
@@ -18,11 +17,11 @@ function App() {
     const [pass, setPass] = useState(false);
     const [okCells, setOkCells] = useState(okList);
     const [active, setActive] = useState(false);
-    //クリックできるマスの表示非表示
-    const ShowCells = () => {
-        setActive(true)
-    }
-
+    const [connectionsNum, setConnectionsNum] = useState(0)
+//クリックできるマスの表示非表示
+const ShowCells = () => {
+    setActive(true)
+}
 //サーバーから届いた座標で石を置く
 useEffect(() => {
     socket.on('putStone', (payload) => {
@@ -52,6 +51,12 @@ useEffect(() => {
       socket.off('putStone');
   };
 }, [othello]);
+//接続数
+useEffect(() => {
+  socket.on('client-count', (clientCunt) => {
+     setConnectionsNum(clientCunt/4)
+  })
+}, [connectionsNum]);
 
 //パスした場合
 useEffect(() => {
@@ -96,10 +101,10 @@ useEffect(() => {
     <>
       <div className="App">
         <Info
-            finish={finish}
-            myTurn={myTurn}
-            count={count}
-            pass={pass}
+         finish={finish}
+         myTurn={myTurn}
+         count={count}
+         pass={pass}
          />
         <Board
           size={size}
@@ -108,14 +113,15 @@ useEffect(() => {
           myTurn={myTurn}
           active={active}
           />
-         <div className="button-wrap -show">
-            <button className="button" onClick={ShowCells}>クリックできるマスを見る</button>
-         </div>
+            <div className="button-wrap -show">
+                <button className="button" onClick={ShowCells}>クリックできるマスを見る</button>
+            </div>
         <Reload />
      </div>
      <div className="App Mess">
         <Message
-          size={size}
+         size={size}
+         connectionsNum={connectionsNum}
         />
       </div>
     </>

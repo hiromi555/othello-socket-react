@@ -21,9 +21,8 @@ app.get('*', (req, res) => {
 
 //本番　オセロ
 io.on('connection', (socket) => {
-    socket.on('message', (message) => {
-       socket.broadcast.emit('message', message)
-    })
+    //接続台数
+     io.emit('client-count', io.engine.clientsCount);
     //クライアントから座標が届く
     socket.on('clickCell', (payload) => {
     //届いた座標を全クライアントに送信
@@ -39,7 +38,7 @@ io.on('connection', (socket) => {
         io.emit('message', message)
     })
     socket.on("disconnect", (reason) => {
-        io.emit('message', `（サーバー情報）切断：${reason}`)
+      io.emit('client-count',  io.engine.clientsCount);
     });
 });
 

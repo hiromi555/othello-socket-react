@@ -117,8 +117,15 @@ font-size:1.25em;
     font-size: 1.1rem;
 }
 .mess-wrap{
-   margin: 3rem 0;
+   margin: 1rem 0;
    text-align:left;
+}
+.center{
+  text-align:center;
+  font-size: 1.1rem;
+ }
+.small{
+ font-size: 0.85rem;
 }
 input{
     width: 270px;

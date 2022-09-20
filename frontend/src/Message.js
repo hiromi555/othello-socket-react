@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import io from "socket.io-client";
 import xssFilters from 'xss-filters'
-
 const socket = io();
 
-export const Message = ({size}) => {
+export const Message = ({size, connectionsNum}) => {
     const [message, setText] = useState('');
     const [messageList, setMessageList] = useState(['オセロゲームへようこそ!!']);
     //メッセージを送る
@@ -30,12 +29,13 @@ export const Message = ({size}) => {
 
     return (
         <div className='mess-wrap' style={{ width: size * 9 }}>
+            <p className='center'>接続数：{ connectionsNum }</p>
+            <p className='small'>＊諸事情により15分間隔ロボットが自動アクセスしています</p>
            <ul className='message'>
              {messageList.map((message, index) =>
              <li key={`m-${index}`}>{message}</li>
              )}
             </ul>
-             <p>＊（サーバー情報）諸事情により15分間隔で自動アクセスしています</p>
             <form onSubmit={addMessage} className="fixed">
             <input
                 style={{ width: size*7}}
