@@ -27,7 +27,7 @@ export const Message = ({size}) => {
     },[message])
 
     return (
-        <div className='mess-wrap' style={{ width: size*8}}>
+        <div className='mess-wrap' style={{ width: size*9}}>
            <ul className='message'>
              {messageList.map((message, index) =>
              <li key={`m-${index}`}>{message}</li>
@@ -35,12 +35,12 @@ export const Message = ({size}) => {
             </ul>
             <form onSubmit={addMessage} className="fixed">
             <input
-                style={{ width: size*6.5}}
+                style={{ width: size*7}}
                 placeholder=" メッセージ"
                 type="text"
                 value={message}
                 onChange={(e) => setText( e.target.value )}/>
-                <button className="button" style={{ width: size*1.5}}>送信</button>
+                <button className="button" style={{ width: size*2}}>送信</button>
             </form>
         </div>
     )
