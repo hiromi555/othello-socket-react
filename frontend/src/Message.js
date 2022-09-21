@@ -5,7 +5,7 @@ const socket = io();
 
 export const Message = ({size}) => {
     const [message, setText] = useState('');
-    const [messageList, setMessageList] = useState(['オセロゲームへようこそ！！ 同時に接続した人同士が同じ画面を共有しま。データは保存されません。リロードするとデータは消去されます。']);
+    const [messageList, setMessageList] = useState(['オセロゲームへようこそ！！ 同時に接続した人同士が同じ画面を共有。リロードするとデータは消去されます。']);
     //メッセージを送る
     const addMessage = (e) => {
         e.preventDefault()
