@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import xssFilters from 'xss-filters'
 const socket = io();
 
-export const Message = ({size, connectionsNum}) => {
+export const Message = ({size}) => {
     const [message, setText] = useState('');
     const [messageList, setMessageList] = useState(['オセロゲームへようこそ!!']);
     //メッセージを送る
@@ -29,8 +29,6 @@ export const Message = ({size, connectionsNum}) => {
 
     return (
         <div className='mess-wrap' style={{ width: size * 8 }}>
-            <p className='center'>接続数：{ connectionsNum }</p>
-            <p className='small'>＊諸事情によりロボットが定期的にアクセスしています</p>
            <ul className='message'>
              {messageList.map((message, index) =>
              <li key={`m-${index}`}>{message}</li>

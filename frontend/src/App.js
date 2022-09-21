@@ -103,7 +103,8 @@ useEffect(() => {
 
     return (
     <>
-      <div className="App">
+        <div className="App">
+            <p className='center'>接続数：{ connectionsNum }</p>
         <Info
          finish={finish}
          myTurn={myTurn}
@@ -125,7 +126,6 @@ useEffect(() => {
      <div className="App Mess">
         <Message
          size={size}
-         connectionsNum={connectionsNum}
         />
       </div>
     </>
