@@ -1,12 +1,6 @@
 import { Cell } from './Cell'
-import { useState } from 'react';
 
 export const Board = ({othello, okCells, myTurn, size, active}) => {
-// const [active, setActive] = useState(false);
-// //クリックできるマスの表示非表示
-// const classToggle = () => {
-//     setActive(pre=>!pre)
-// }
 return (
    <>
     <div className='outline'>
