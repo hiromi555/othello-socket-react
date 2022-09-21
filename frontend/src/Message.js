@@ -28,7 +28,7 @@ export const Message = ({size, connectionsNum}) => {
     },[message])
 
     return (
-        <div className='mess-wrap' style={{ width: size * 9 }}>
+        <div className='mess-wrap' style={{ width: size * 8 }}>
             <p className='center'>接続数：{ connectionsNum }</p>
             <p className='small'>＊諸事情によりロボットが定期的にアクセスしています</p>
            <ul className='message'>
@@ -38,7 +38,7 @@ export const Message = ({size, connectionsNum}) => {
             </ul>
             <form onSubmit={addMessage} className="fixed">
             <input
-                style={{ width: size*7}}
+                style={{ width: size * 6}}
                 placeholder=" メッセージ"
                 type="text"
                 value={message}
